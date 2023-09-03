@@ -16,7 +16,7 @@ String mqttName = "Rainwater Cistern";
 /* Define object */
 WiFiClient wifi; // WiFi Client
 PubSubClient client(wifi); //MQTT Client
-WIFi_Wrapper wifiWrapper("wifiSSID", "WIFI_PASSWORD", &wifi);
+WIFi_Wrapper wifiWrapper("WiFi-2.4-DC03", "AC4635D555", &wifi);
 MQTT_Connector MQTTConnector(mqttServer, mqttUser, mqttPassword, &client, mqttPort);
 MQTT_Broker MQTTClient(sensorNumber, unit_of_meas, stateTopicPath, dev_cla, mqttName, &MQTTConnector);
 
