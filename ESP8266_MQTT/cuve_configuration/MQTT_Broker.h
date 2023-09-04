@@ -11,7 +11,7 @@ class MQTT_Broker {
     public:
         MQTT_Broker(int sensor_number, String unit_of_meas, String stateTopicPath, String dev_cla, String mqtt_name, MQTT_Connector *mqtt_connector);
         bool sendDiscovery(String discoveryTopic);
-        bool sendPublish(dictionary kvp[]);
+        bool sendPublish(int level);
         void InitializeConnection();
         MQTT_Connector *MqttConnector;
 

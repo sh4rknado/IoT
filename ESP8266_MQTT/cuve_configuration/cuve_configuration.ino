@@ -1,15 +1,15 @@
 #include "WIFi_Wrapper.h"
 #include "MQTT_Broker.h"
 
-IPAddress mqttServer(192, 168, 1, 200);  // The IP of your MQTT broker
+IPAddress mqttServer(192, 168, 1, 178);  // The IP of your MQTT broker
 uint16_t mqttPort = 1883;
-const char *mqttUser = "username";
-const char *mqttPassword = "password";
+const char *mqttUser = "homeassistant";
+const char *mqttPassword = "chi7zaisuTh1ohgaiqu1ahfahseelooYohxoo5Dahzi2oQuaecook0Thah2oPh4l";
 
 // Numerical system for registering devices.
 int sensorNumber = 1;
 String unit_of_meas = "%";
-String stateTopicPath = "home/cistern/";
+String stateTopicPath = "home/cuve/state";
 String dev_cla = "level";
 String mqttName = "Rainwater Cistern";
 
@@ -29,8 +29,8 @@ void setup() {
   MQTTClient.InitializeConnection();
   
   // Send MQTT Discovery Requesr
-  String discoveryTopic = "homeassistant/sensor/cistern_sensor_" + String(sensorNumber) + "/level/config";
-  MQTTClient.sendDiscovery(discoveryTopic);
+  // String discoveryTopic = "homeassistant/binary_sensor/cuve_sensor_" + String(sensorNumber) + "/config";
+  // MQTTClient.sendDiscovery(discoveryTopic);
 }
 
 void loop() 
@@ -41,19 +41,14 @@ void loop()
     Serial.println("===== Sending Data =====");
 
     if (isnan(level)) {
-       level = 0;
+       level = 10;
     }
 
-    dictionary dico[1];
-    dico[0] = {"level", String(level)};
-
-    bool published = MQTTClient.sendPublish(dico);
+    bool published = MQTTClient.sendPublish(level);
 
     // Print the sensor values to Serial out (for debugging)
-    Serial.println("published: ");
-    Serial.println(published);
-    Serial.println("level: ");
-    Serial.println(level);    
+    Serial.println("published: " + String(published));
+    Serial.println("level: " + String(level));
   }
   else {
     Serial.println("WiFi Disconnected");
@@ -61,5 +56,5 @@ void loop()
 
   // Go into deep sleep mode for 60 seconds
   Serial.println("Deep sleep mode for 60 seconds");
-  ESP.deepSleep(10e6);
+  ESP.deepSleep(6e7); 
 }

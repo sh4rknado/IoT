@@ -12,10 +12,12 @@ WiFiClient* WIFi_Wrapper::GetClient(){
 }
 
 void WIFi_Wrapper::InitializeConnection() {
+  delay(10);
+  Serial.println();
+  Serial.println("Connecting to Wi-Fi : " + String(_wifi_ssid));
   WiFi.begin(_wifi_ssid, _password);
 
-  Serial.println("Connecting to Wi-Fi");
-
+  Serial.print("\nplease wait");
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
@@ -24,7 +26,10 @@ void WIFi_Wrapper::InitializeConnection() {
   WiFi.setAutoReconnect(true);
   WiFi.persistent(true);
   
-  Serial.println("Connected to Wi-Fi");
+  Serial.println("\nConnexion established sucessfully\n");
+  Serial.print("Addresse IP : ");
+  Serial.print(WiFi.localIP());
+  Serial.print("\n");
 }
 
 bool WIFi_Wrapper::IsConnected() {

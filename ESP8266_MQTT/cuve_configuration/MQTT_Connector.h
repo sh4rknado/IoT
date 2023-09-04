@@ -13,6 +13,7 @@ class MQTT_Connector {
         void SetServer();
         bool Connect(String _mqttName);
         bool Publish(String _stateTopic, char buffer[256], size_t json);
+        int State();
 
     private:
         IPAddress _mqttServer;

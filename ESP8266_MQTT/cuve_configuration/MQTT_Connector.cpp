@@ -24,3 +24,7 @@ bool MQTT_Connector::Connect(String _mqttName) {
 bool MQTT_Connector::Publish(String _stateTopic, char buffer[256], size_t json) {
   return _client->publish(_stateTopic.c_str(), buffer, json);
 }
+
+int MQTT_Connector::State() {
+  return _client->state();
+}
